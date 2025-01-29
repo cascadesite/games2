@@ -6,26 +6,24 @@
                 margin: 0;
                 padding: 0;
             }
-            .game {
-                width: 100%;
-                height: 100%;
-            }
         </style>
     </head>
     <body>
-        <div id="ruffle" class="game"></div>
+        <div id="container"></div>
         <script>
-            var swfobject = {};
-            
-            swfobject.embedSWF = function(url, cont){
-                var ruffle = window.RufflePlayer.newest(),
-                    player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-                    });
-                
-                player.load({ url: url });
-            }
-            
-            swfobject.embedSWF('riddleschool.swf', 'ruffle');
+            window.RufflePlayer = window.RufflePlayer || {};
+            window.addEventListener("load", (event) => {
+                const ruffle = window.RufflePlayer.newest();
+                const player = ruffle.createPlayer();
+                const container = document.getElementById("container"); 
+                container.appendChild(player);
+                player.load({
+                    url: "riddleschool.swf", 
+                    backgroundColor: "#000", 
+                 });
+                player.style.width = "100%"; 
+                player.style.height = "100%";
+            });
         </script>
         <script>
 function loadEruda() {
