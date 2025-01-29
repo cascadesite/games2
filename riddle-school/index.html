@@ -15,15 +15,17 @@
     <body>
         <div id="ruffle" class="game"></div>
         <script>
-            window.RufflePlayer = window.RufflePlayer || {};
-        
-            window.addEventListener("DOMContentLoaded", () => {
-                let ruffle = window.RufflePlayer.newest();
-                let player = ruffle.createPlayer();
-                let container = document.getElementById("container");
-                container.appendChild(player);
-                player.ruffle().load("riddleschool.swf");
-            });
+            var swfobject = {};
+            
+            swfobject.embedSWF = function(url, cont){
+                var ruffle = window.RufflePlayer.newest(),
+                    player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                    });
+                
+                player.load({ url: url });
+            }
+            
+            swfobject.embedSWF('riddleschool.swf', 'ruffle');
         </script>
         <script src="../ruffle/ruffle.js"></script>
     </body>
